@@ -21,6 +21,21 @@ public class Sql2oPlantDao implements PlantDao {
         this.sql2o = sql2o;
     }
 
+
+    @Override
+    public void add(Plant plant) {
+        String sql = "INSERT INTO plants (plantName,daysToMaturity,plantSpacing,rowSpacing) VALUES (:plantName,:daysToMaturity,:plantSpacing,:rowSpacing)";
+        try (Connection con = sql2o.open()) {
+            int id = (int) con.createQuery(sql)
+                    .bind(plant)
+                    .executeUpdate()
+                    .getKey();
+            plant.setId(id);
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
+    }
+
     @Override
     public List<Plant> getAll() {
         String sql = "SELECT * FROM plants ";

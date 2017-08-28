@@ -10,7 +10,8 @@ import java.util.List;
  */
 public interface EventDao {
 
-
+    //Create
+    void add(Event event);
     //Read
     List<Event> getAllByPlantId(int plantId);
     //List<Event> getAllEventsByTypeAndPlantId();

@@ -10,8 +10,9 @@ import java.util.List;
 public interface PlantDao {
 
     //Create
-    //void add(Plant plant);
-    //join
+    void add(Plant plant);
+    //Join to event table?
+
 
     //Read
     List<Plant> getAll();

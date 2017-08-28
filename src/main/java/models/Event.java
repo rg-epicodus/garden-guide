@@ -4,7 +4,7 @@ package models;
  * Created by Guest on 8/28/17.
  */
 public class Event {
-    private int eventId;
+    private int id;
     private String startDate;
     private String endDate;
     private String type;
@@ -17,12 +17,12 @@ public class Event {
         this.plantId = plantId;
     }
 
-    public int getEventId() {
-        return eventId;
+    public int getId() {
+        return id;
     }
 
-    public void setEventId(int eventId) {
-        this.eventId = eventId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getStartDate() {
@@ -64,7 +64,7 @@ public class Event {
 
         Event event = (Event) o;
 
-        if (eventId != event.eventId) return false;
+        if (id != event.id) return false;
         if (plantId != event.plantId) return false;
         if (!startDate.equals(event.startDate)) return false;
         if (!endDate.equals(event.endDate)) return false;
@@ -73,7 +73,7 @@ public class Event {
 
     @Override
     public int hashCode() {
-        int result = eventId;
+        int result = id;
         result = 31 * result + startDate.hashCode();
         result = 31 * result + endDate.hashCode();
         result = 31 * result + type.hashCode();

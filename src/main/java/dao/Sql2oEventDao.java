@@ -3,6 +3,7 @@ package dao;
 import models.Event;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+import org.sql2o.Sql2oException;
 
 import java.util.List;
 
@@ -17,8 +18,22 @@ public class Sql2oEventDao implements EventDao{
     }
 
     @Override
-    public List<Event> getAllByPlantId(int plantId) {
-        String sql = "SELECT * FROM events WHERE plantId = :plantId";
+    public void add(Event event) {
+        String sql = "INSERT INTO events (startDate,endDate,type,plantId) VALUES (:startDate,:endDate,:type,:plantId)";
+        try (Connection con = sql2o.open()) {
+            int id = (int) con.createQuery(sql)
+                    .bind(event)
+                    .executeUpdate()
+                    .getKey();
+            event.setId(id);
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    @Override
+    public List<Event> getAllByPlantId(int eventId) {
+        String sql = "SELECT * FROM events WHERE eventId = :eventId";
         try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
                     .executeAndFetch(Event.class);
