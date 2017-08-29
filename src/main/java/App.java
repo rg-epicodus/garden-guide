@@ -12,16 +12,29 @@ public class App {
         staticFileLocation("/public");
 
 
+
+        // show home page (root route)
+        get("/", (req, res) -> {
+            Map<String, Object> model = new HashMap<String, Object>();
+            return new ModelAndView(model, "index.hbs");
+        }, new HandlebarsTemplateEngine());
+
         //get: show about page
         get("/about", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             return new ModelAndView(model, "about.hbs");
         }, new HandlebarsTemplateEngine());
 
-        // show home page (root route)
-        get("/", (req, res) -> {
-            Map<String, Object> model = new HashMap<String, Object>();
-            return new ModelAndView(model, "index.hbs");
+        //get: show sales page
+        get("/sales", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "sales.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //get: show careers page
+        get("/careers", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "careers.hbs");
         }, new HandlebarsTemplateEngine());
 
     }
