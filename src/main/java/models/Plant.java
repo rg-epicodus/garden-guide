@@ -6,33 +6,25 @@ import java.util.Date;
  * Created by Guest on 8/28/17.
  */
 public class Plant {
-    private int plantId;
+    private int id;
     private String plantName;
     private int daysToMaturity;
     private String plantSpacing;
     private String rowSpacing;
-//    private String plantingStartDate;
-//    private String plantingEndDate;
-//    private String harvestStartDate;
-//    private String harvestEndDate;
 
     public Plant(String plantName, int daysToMaturity,String plantSpacing, String rowSpacing) {
        this.plantName = plantName;
        this.daysToMaturity = daysToMaturity;
        this.plantSpacing = plantSpacing;
        this.rowSpacing = rowSpacing;
-//       this.plantingStartDate = plantingStartDate;
-//       this.plantingEndDate = plantingEndDate;
-//       this.harvestStartDate = harvestStartDate;
-//       this.harvestEndDate = harvestEndDate;
     }
 
     public int getId() {
-        return plantId;
+        return id;
     }
 
-    public void setId(int plantId) {
-        this.plantId = plantId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPlantName() {
@@ -74,7 +66,7 @@ public class Plant {
 
         Plant plant = (Plant) o;
 
-        if (plantId != plant.plantId) return false;
+        if (id != plant.id) return false;
         if (daysToMaturity != plant.daysToMaturity) return false;
         if (!plantName.equals(plant.plantName)) return false;
         if (plantSpacing != null ? !plantSpacing.equals(plant.plantSpacing) : plant.plantSpacing != null) return false;
@@ -83,7 +75,7 @@ public class Plant {
 
     @Override
     public int hashCode() {
-        int result = plantId;
+        int result = id;
         result = 31 * result + plantName.hashCode();
         result = 31 * result + daysToMaturity;
         result = 31 * result + (plantSpacing != null ? plantSpacing.hashCode() : 0);

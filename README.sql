@@ -33,6 +33,29 @@ COMMENT
 4. Somehow a mirror'd databasw will be created for test purposes ...not sure details
 see below CREATE DATABASE example_test WITH TEMPLATE example
 ################################################
+# jms 8.29 hooked up postgres
+################################################
+psql
+CREATE DATABASE garden_guide;
+CREATE DATABASE garden_guide_test WITH TEMPLATE garden_guide;
+\c garden_guide #connect to database
+>>
+CREATE TABLE plants (id int, plantName varchar, daysToMaturity varchar, plantSpacing varchar, rowSpacing varchar);
+
+INSERT INTO plants (plantName,daysToMaturity,plantSpacing,rowSpacing) VALUE ("tomato",92,"1 foot","2ft");
+INSERT INTO plants (plantName,daysToMaturity,plantSpacing,rowSpacing) VALUE ("carrot",82,"1 foot","2ft");
+INSERT INTO plants (plantName,daysToMaturity,plantSpacing,rowSpacing) VALUE ("beet",72,"1 foot","2ft");
+INSERT INTO plants (plantName,daysToMaturity,plantSpacing,rowSpacing) VALUE ("basil",22,"1 foot","2ft");
+INSERT INTO plants (plantName,daysToMaturity,plantSpacing,rowSpacing) VALUE ("cilantro",12,"1 foot","2ft");
+INSERT INTO plants (plantName,daysToMaturity,plantSpacing,rowSpacing) VALUE ("jalapeno",62,"1 foot","2ft");
+<<
+\c #connect to original db (\l)  \conninfo
+DROP DATABASE garden_guide
+\q
+
+
+
+################################################
 
 
 
