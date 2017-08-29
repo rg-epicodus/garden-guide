@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS plants (
- plantId int PRIMARY KEY auto_increment,
+ id int PRIMARY KEY auto_increment,
  plantName VARCHAR,
  daysToMaturity INT,
  plantSpacing VARCHAR,

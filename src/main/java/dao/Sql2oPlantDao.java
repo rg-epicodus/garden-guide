@@ -23,25 +23,26 @@ public class Sql2oPlantDao implements PlantDao {
     }
 
 
+    // Create
     @Override
     public void add(Plant plant) {
-        System.out.println("DEBUG add Plant");
-//        String sql = "INSERT INTO plants (plantName,daysToMaturity,plantSpacing,rowSpacing) VALUES (:plantName,:daysToMaturity,:plantSpacing,:rowSpacing)";
-//        try (Connection con = DB.sql2o.open()) {
-//            int id = (int) con.createQuery(sql)
-//                    .bind(plant)
-//                    .executeUpdate()
-//                    .getKey();
-//            plant.setId(id);
-//        } catch (Sql2oException ex) {
-//            System.out.println(ex);
-//        }
+        String sql = "INSERT INTO plants (plantName,daysToMaturity,plantSpacing,rowSpacing) VALUES (:plantName,:daysToMaturity,:plantSpacing,:rowSpacing)";
+        try (Connection con = sql2o.open()) {
+            int id = (int) con.createQuery(sql)
+                    .bind(plant)
+                    .executeUpdate()
+                    .getKey();
+            plant.setId(id);
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
     }
 
+    // Read
     @Override
     public List<Plant> getAll() {
         String sql = "SELECT * FROM plants ";
-        try (Connection con = DB.sql2o.open()) {
+        try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
                     .executeAndFetch(Plant.class);
         }
@@ -50,10 +51,28 @@ public class Sql2oPlantDao implements PlantDao {
     @Override
     public Plant findById(int id) {
         String sql = "SELECT * FROM plants WHERE id = :id";
-        try (Connection con = DB.sql2o.open()) {
+        try (Connection con = sql2o.open()) {
             return con.createQuery(sql)
                     .addParameter("id", id)
                     .executeAndFetchFirst(Plant.class);
+        }
+    }
+
+    //Update
+
+
+
+    //Delete
+    @Override
+    //will want to delete from all joined tables
+    public void deleteById(int id) {
+        String sql = "DELETE from plants WHERE id=:id";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
         }
     }
 

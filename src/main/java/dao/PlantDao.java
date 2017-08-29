@@ -14,14 +14,14 @@ public interface PlantDao {
     //Join to event table?
 
 
-    //Read
-    List<Plant> getAll();
-    Plant findById(int id);
+//    //Read
+     List<Plant> getAll();
+     Plant findById(int id);
 
     //update
     //omit for now
 
     //delete
-    //void deleteById(int id);
+    void deleteById(int id);
 
 }
