@@ -25,16 +25,17 @@ public class Sql2oPlantDao implements PlantDao {
 
     @Override
     public void add(Plant plant) {
-        String sql = "INSERT INTO plants (plantName,daysToMaturity,plantSpacing,rowSpacing) VALUES (:plantName,:daysToMaturity,:plantSpacing,:rowSpacing)";
-        try (Connection con = DB.sql2o.open()) {
-            int id = (int) con.createQuery(sql)
-                    .bind(plant)
-                    .executeUpdate()
-                    .getKey();
-            plant.setId(id);
-        } catch (Sql2oException ex) {
-            System.out.println(ex);
-        }
+        System.out.println("DEBUG add Plant");
+//        String sql = "INSERT INTO plants (plantName,daysToMaturity,plantSpacing,rowSpacing) VALUES (:plantName,:daysToMaturity,:plantSpacing,:rowSpacing)";
+//        try (Connection con = DB.sql2o.open()) {
+//            int id = (int) con.createQuery(sql)
+//                    .bind(plant)
+//                    .executeUpdate()
+//                    .getKey();
+//            plant.setId(id);
+//        } catch (Sql2oException ex) {
+//            System.out.println(ex);
+//        }
     }
 
     @Override

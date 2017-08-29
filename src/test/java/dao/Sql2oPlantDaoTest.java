@@ -8,21 +8,28 @@ import org.junit.Test;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.sql.DriverManager;
 import java.util.Arrays;
 
+import static models.DB.sql2o;
 import static org.junit.Assert.*;
 
 public class Sql2oPlantDaoTest {
   private Sql2oPlantDao plantDao;
+  private Connection conn;
 
   @Before
   public void setUp() throws Exception {
-    DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/garden_guide_test", null, null);
+    String connectionString = ("jdbc:postgresql://localhost:5432/garden_guide_test");
+    Sql2o sql2o = new Sql2o(connectionString, "", "");
+    plantDao = new Sql2oPlantDao(sql2o);
+    conn = sql2o.open();
+
   }
 
   @After
   public void tearDown() throws Exception {
-    try(Connection con = DB.sql2o.open()) {
+    try(Connection con = sql2o.open()) {
       String sql = "DELETE FROM plants *;";
       con.createQuery(sql).executeUpdate();
     }
@@ -39,6 +46,10 @@ public class Sql2oPlantDaoTest {
   @Test
   public void existingPlantsCanBeFoundById() throws Exception {
     Plant plant = getTestPlant();
+    System.out.println("DEBUG"+plant.getPlantName());
+    System.out.println("DEBUG"+plant.getDaysToMaturity());
+    System.out.println("DEBUG"+plant.getPlantSpacing());
+    System.out.println("DEBUG"+plant.getRowSpacing());
     plantDao.add(plant);
     Plant foundPlant = plantDao.findById(plant.getId());
     assertEquals(plant, foundPlant);
